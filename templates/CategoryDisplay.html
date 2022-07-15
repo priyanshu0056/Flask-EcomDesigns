@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Category: {{categoryName}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link rel="stylesheet" href={{ url_for('static', filename='css/HomePage.css') }} />
+<link rel="stylesheet" href={{ url_for('static', filename='css/TopStyle.css') }} />
+</head>
+<body>
+<!--************************************************  -->
+<div id="title">
+	<a href="/">
+		<img id="logo" src= {{ url_for('static', filename='images/WebsiteIcon.png') }} />
+	</a>
+	<div class="search">         
+		<form>
+			<input type="text" name="search" placeholder="Search..">
+			<button>
+				<i class="fa fa-search"
+					style="font-size: 18px;">
+				</i>
+			</button>
+		</form>
+	</div>
+	<div id="kart">
+		<a class="link" href="/cart"><button class="newbtn">
+			<img src={{url_for('static', filename='images/CartImage.png')}} id="cartIcon" />
+			CART {{noOfItems}}</button>
+		</a>
+	</div>
+		{% if not loggedIn %}
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+	{% else %} 
+	<div class="dropdown">
+		<button class="dropbtn">Welcome<br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<hr>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	{% endif %}
+	<ul class="ultype">  
+		<li class="litype"><a href="/"> Home </a></li>
+		<li class="litype"><a href="/about"> About </a></li>   
+		<li class="litype"><a href="/contact"> Contact </a></li>
+		<li class="litype"><a href="/yourdesigns">Your Designs</a></li> 
+	</ul>
+</div>
+<!--  ***************************************-->
+
+<div class="itemdisplay">
+	<h2 id="headingtype">Products (Category {{categoryName}}):</h2>
+	{% for itemData in data %}
+	<table class="card">
+		<tr id="productImage" class="conatiner">
+			{% for row in itemData %}
+			<td>
+				<a href="/productDescription?productId={{row[0]}}">
+					<img src={{ url_for('static', filename='uploads/' + row[3]) }} id="itemImage" style="width:100%" />
+				</a>
+					<tr id="productName">
+					<td>
+						<a href="/productDescription?productId={{row[0]}}" class="newanchor">
+						{{row[1]}}
+						</a>
+				</tr>
+				<tr id="productPrice">
+					<td>
+						<a href="/productDescription?productId={{row[0]}}" class="newanchor">
+						${{row[2]}}
+						</a>
+					</td>
+				</tr>
+			</td>
+			{% endfor %}
+		</tr>
+	</table>
+	{% endfor %}
+</div>
+<br><br><br>
+</body>
+</html>

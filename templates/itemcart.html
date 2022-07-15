@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Your Cart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href={{url_for('static', filename='css/ItemCart.css')}} />
+<link rel="stylesheet" href={{url_for('static', filename='css/TopStyle.css') }} />
+</head>
+<body>
+	<div id="title">
+		<a href="/">
+			<img id="logo" src= {{ url_for('static', filename='images/WebsiteIcon.png') }} />
+		</a>
+		<div class="search">         
+			<form>
+				<input type="text" name="search" placeholder="Search..">
+				<button>
+					<i class="fa fa-search"
+						style="font-size: 18px;">
+					</i>
+				</button>
+			</form>
+		</div>
+		<div id="kart">
+			<a class="link" href="/cart"><button class="newbtn">
+				<img src={{url_for('static', filename='images/CartImage.png')}} id="cartIcon" />
+				CART {{noOfItems}}</button>
+			</a>
+		</div>
+			{% if not loggedIn %}
+		<div id="signInButton">
+			<a class="link" href="/loginForm">Sign In</a>
+		</div>
+		{% else %} 
+		<div class="dropdown">
+			<button class="dropbtn">Welcome<br>{{firstName}}</button>
+			<div class="dropdown-content">
+				<a href="/account/orders">Your orders</a>
+				<a href="/account/profile">Your profile</a>
+				<hr>
+				<a href="/logout">Sign Out</a>
+			</div>
+		</div>
+		{% endif %}
+		<ul class="ultype">  
+			<li class="litype"><a href="/"> Home </a></li>
+			<li class="litype"><a href="/about"> About </a></li>   
+			<li class="litype"><a href="/contact"> Contact </a></li>
+			<li class="litype"><a href="/yourdesigns">Your Designs</a></li> 
+		</ul>
+	</div>
+<div id="cartItems"> 
+	<h2>Cart Items</h2>
+	<div id="tableItems">
+		{% for row in products %}
+		<div>
+			<hr id="seperator">
+			<div id="itemImage">
+				<img src={{url_for('static', filename='uploads/'+row[3])}} id="image"/>
+			</div>
+			<div id="itemName">
+				<span id="itemNameTag">{{row[1]}}</span><br>
+				In stock<br><br>
+				<a id="cartanchor" href="/removeFromCart?productId={{row[0]}}">Remove</a>
+			</div>
+			<div id="itemPrice">
+				${{row[2]}}
+			</div>
+		</div>
+		{% endfor %}
+		<hr id="seperator">
+		<div id="total">
+			<span id="subtotal">Subtotal : </span> ${{totalPrice}}
+		</div>
+	</div>
+</div>
+<br><br>
+<a id="cartcheck" href="/checkout">Proceed to checkout</a><br><br>
+<p><i class="material-icons">info</i>Note :- We have Pick-Up and Drop Facilities so you won't have to Worry About Delivery</p>
+<br><br>
+</body>
+</html>
+

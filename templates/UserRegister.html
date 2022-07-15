@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Registration</title>
+<link rel="stylesheet" href={{ url_for('static', filename='css/identity.css') }} />
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/FormValidation.js') }}">
+</script>
+</head>
+<body id="registerbody">
+    <div class="registeritems">
+        <div class="registertitle">REGISTER</div>
+        <div class="inputs">
+<form action="/register" method="POST" onsubmit="return validate()">
+    <input type="email" name="email" placeholder="Email">
+    <input type="password" name="password" id="password" required placeholder="Password">
+    <input type="password" name="cpassword" id="cpassword" placeholder="Confirm Password">
+    <input type="text" name="firstName" placeholder="First Name">
+    <input type="text" name="lastName" placeholder="Last Name">
+    <input type="text" name="address1" placeholder="Address Line 1">
+    <input type="text" name="address2" placeholder="Address Line 2">
+    <input type="text" name="zipcode" placeholder="Zipcode">
+    <input type="text" name="city" placeholder="City">
+    <input type="text" name="state" placeholder="State">
+    <input type="text" name="country" placeholder="Country">
+    <input type="text" name="phone" placeholder="Phone Number">
+    <button type="submit">REGISTER</button>
+</form>
+    <a href="/loginForm">
+        <button>LOGIN</button>
+    </a>
+    </div>
+    </div>
+</body>
+</html>
+
+
+

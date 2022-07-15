@@ -1,0 +1,127 @@
+html{
+	width: 100%;
+}
+body{
+	width: 100%;
+	padding-top: 2%;
+	text-align: left;
+	background: linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	margin: 0%;
+}
+
+ @keyframes gradient{
+	0%{
+		background-position: 0% 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0% 50%;
+	}
+}
+#cartItems{
+	padding-left: 20px;
+}
+#tableItems {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 30px;
+	margin-bottom: 20px; 
+}
+
+#itemImage {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 1.5vw; 
+	margin-bottom: 5px;
+	height: 100px;
+	float: left;
+}
+
+#itemName {
+	margin-left: 7vw;
+	margin-right: 5px;
+	margin-top: 8.5vw;
+	margin-bottom: 5px;
+	height: 100px;
+	width: 200px;
+	float: left;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#titleName {
+	width: 200px;
+	float: left;
+}
+
+#titlePrice {
+	float: left;
+}
+
+#itemPrice {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-size: larger;
+	font-weight: bold;
+	margin-left: 0;
+	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 20vw;
+	display: inline-block;
+}
+
+#image {
+	height: 18vw;
+	width: 15vw;
+}
+
+#seperator {
+	margin:0;
+	max-width: 40vw;
+}
+
+#total {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-weight: bold;
+	font-size: large;
+	padding-left: 400px;
+}
+
+#itemNameTag {
+	font-size: x-large;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-weight: bold;
+}
+
+#subtotal {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-weight: bold;
+	font-size: 25px;
+}
+#cartanchor,#cartcheck{
+	font-style: oblique;
+	font-family:'Times New Roman', Times, serif;
+	font-weight: bolder;
+	border: none;
+	border-radius: 9%;
+	background-color: rgba(241, 160, 9, 0.87);
+	color: rgb(5, 5, 5);
+	padding: 15px 12px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+}
+#cartanchor:hover{
+	background-color: rgba(11, 11, 14, 0.904);
+	color: hsl(43, 25%, 89%);
+}
+#cartcheck{
+	margin-left: 45vw;
+}
+.material-icons{
+	margin-left: 2%;
+	margin-top: 2%;
+}

@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>	login </title>
+<link rel="stylesheet" href={{ url_for('static', filename='css/identity.css') }} />
+</head>
+<body>
+	<div class="loginitem">
+		<img class="siteicon" src= {{ url_for('static', filename='images/WebsiteIcon.png') }} />
+		<div class="logintitle">BrigonDesigns</div>
+	<div class="inputs">
+<form action="/login" method="POST">
+	<input id="loginInput" type="text" name="email" placeholder="Email">
+	<input id="loginInput" type="password" name="password" placeholder="Password">
+	<button type="submit">LOGIN</button>
+</form>
+<a href="/registerationForm">
+	<button>REGISTER</button>
+</a>
+<p class="msg"> {{error}} </p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+html{
+	width: 100%;
+}
+
+body{
+  width: 100%;
+	padding-top: 2%;
+	text-align: left;
+	background: linear-gradient(-45deg,#0f0f0f,#e7e2e4,#02080a,#e3e7e3d5);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+  margin: 0%;
+} 
+ @keyframes gradient{
+	0%{
+		background-position: 0% 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0% 50%;
+	}
+}
+
+.inp {
+  caret-color: rgba(9, 5, 236, 0.822);
+}
+
+.display {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: poppins;
+    width: 95vw;
+    height: 95vw;
+    margin-top: 1%;
+    place-items: center;
+  }
+.passdisplay{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: poppins;
+    margin-top: 0%;
+    width: 100vw;
+    height: 55vw;
+    place-items: center;
+}
+.edit{
+    position: relative;
+    width: 350px;
+    height: 1200px;
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #ecf0f3;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+}
+.passedit{
+    position: relative;
+    width: 350px;
+    height: 580px;
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #ecf0f3;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+}
+.inputs {
+    text-align: left;
+    margin-top: 30px;
+  }
+.inp, .inpbutton {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+  }
+.inp {
+    margin-bottom: 10%;
+    background: #ecf0f3;
+    padding: 10px;
+    padding-left: 20px;
+    height: 50px;
+    font-size: 14px;
+    border-radius: 50px;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+  }
+.inpbutton {
+    letter-spacing: 2px;
+    font-size: large;
+    color: white;
+    margin-top: 20px;
+    background: #1DA1F2;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 900;
+    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+    transition: 0.5s;
+}
+
+.inpbutton:hover {
+    box-shadow: none;
+    background-color: black;
+    color: white;
+}
+.profiletitle{
+    margin-top: 0%;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: #1DA1F2;
+    letter-spacing: 2px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}

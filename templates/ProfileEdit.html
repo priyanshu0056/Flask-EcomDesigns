@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Edit Profile </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href={{ url_for('static', filename='css/ProfileEdit.css') }} />
+<link rel="stylesheet" href={{ url_for('static', filename='css/TopStyle.css') }} />
+<div id="title">
+	<a href="/">
+		<img id="logo" src= {{ url_for('static', filename='images/WebsiteIcon.png') }} />
+	</a>
+	<div class="search">         
+		<form>
+			<input type="text" name="search" placeholder="Search..">
+			<button>
+				<i class="fa fa-search"
+					style="font-size: 18px;">
+				</i>
+			</button>
+		</form>
+	</div>
+	<div id="kart">
+		<a class="link" href="/cart"><button class="newbtn">
+			<img src={{url_for('static', filename='images/CartImage.png')}} id="cartIcon" />
+			CART {{noOfItems}}</button>
+		</a>
+	</div>
+		{% if not loggedIn %}
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+	{% else %} 
+	<div class="dropdown">
+		<button class="dropbtn">Welcome<br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<hr>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	{% endif %}
+	<ul class="ultype">  
+		<li class="litype"><a href="/"> Home </a></li>
+		<li class="litype"><a href="/about"> About </a></li>   
+		<li class="litype"><a href="/contact"> Contact </a></li>
+		<li class="litype"><a href="/yourdesigns">Your Designs</a></li> 
+	</ul>
+</div>
+</head>
+<body>
+<div class="display">
+	<div class="edit">
+        <div class="profiletitle">Edit Profile</div>
+        <div class="inputs">
+	<form action="/updateProfile" method="POST">
+		<p>Email<input class="inp" type="email" name="email" value={{profileData[1]}} readonly="readonly"></p>
+		<p>First Name<input class="inp" type="text" name="firstName" value={{profileData[2]}}></p>
+		<p>Last Name <input class="inp" type="text" name="lastName" value={{profileData[3]}}></p>
+		<p>Address 1 <input class="inp" type="text" name="address1" value={{profileData[4]}}></p>
+		<p>Address 2 <input class="inp" type="text" name="address2" value={{profileData[5]}}></p>
+		<p>Zip Code <input class="inp" type="text" name="zipcode" value={{profileData[6]}}></p>
+		<p>City <input class="inp" type="text" name="city" value={{profileData[7]}}></p>
+		<p>State<input class="inp" type="text" name="state" value={{profileData[8]}}></p>
+		<p>Country <input class="inp" type="text" name="country" value={{profileData[9]}}></p>
+		<p>Phone Number <input class="inp" type="text" name="phone" value={{profileData[10]}}></p>
+		<button class="inpbutton" type="submit">SAVE</button>
+	</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+
