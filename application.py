@@ -1,8 +1,10 @@
+# Importing Modules for working of Application
+import requests
 from flask import *
 import sqlite3, hashlib, os
 from werkzeug.utils import secure_filename
-import requests
 
+# Configuring different folder and database
 app = Flask(__name__)
 app.secret_key = 'random string'
 UPLOAD_FOLDER = 'static/uploads'
@@ -13,7 +15,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/")
 def root():
     loggedIn, firstName, noOfItems = getLoginDetails()
-    with sqlite3.connect('database.db') as conn:
+    with sqlite3.connect('SiteBackend.db') as conn:
         cur = conn.cursor()
         cur.execute('SELECT productId, name, price, description, image, stock FROM products')
         itemData = cur.fetchall()
@@ -25,7 +27,7 @@ def root():
 
 # Accessing Login Page
 def getLoginDetails():
-    with sqlite3.connect('database.db') as conn:
+    with sqlite3.connect('SiteBackend.db') as conn:
         cur = conn.cursor()
         if 'email' not in session:
             loggedIn = False
@@ -38,13 +40,14 @@ def getLoginDetails():
             cur.execute("SELECT count(productId) FROM kart WHERE userId = ?", (userId, ))
             noOfItems = cur.fetchone()[0]
     conn.close()
+    # Returning data to loginPage
     return (loggedIn, firstName, noOfItems)
 
 
 # Routing to ItemAdd.html
 @app.route("/add")
 def admin():
-    with sqlite3.connect('database.db') as conn:
+    with sqlite3.connect('SiteBackend.db') as conn:
         cur = conn.cursor()
         cur.execute("SELECT categoryId, name FROM categories")
         categories = cur.fetchall()
@@ -66,7 +69,7 @@ def addItem():
             filename = secure_filename(image.filename)
             image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         imagename = filename
-        with sqlite3.connect('database.db') as conn:
+        with sqlite3.connect('SiteBackend.db') as conn:
             try:
                 cur = conn.cursor()
                 cur.execute('''INSERT INTO products (name, price, description, image, stock, categoryId) VALUES (?, ?, ?, ?, ?, ?)''', (name, price, description, imagename, stock, categoryId))
@@ -82,7 +85,7 @@ def addItem():
 # Routing to RemoveProduct.html
 @app.route("/remove")
 def remove():
-    with sqlite3.connect('database.db') as conn:
+    with sqlite3.connect('SiteBackend.db') as conn:
         cur = conn.cursor()
         cur.execute('SELECT productId, name, price, description, image, stock FROM products')
         data = cur.fetchall()
@@ -93,7 +96,7 @@ def remove():
 @app.route("/removeItem")
 def removeItem():
     productId = request.args.get('productId')
-    with sqlite3.connect('database.db') as conn:
+    with sqlite3.connect('SiteBackend.db') as conn:
         try:
             cur = conn.cursor()
             cur.execute('DELETE FROM products WHERE productID = ?', (productId, ))
@@ -111,7 +114,7 @@ def removeItem():
 def displayCategory():
         loggedIn, firstName, noOfItems = getLoginDetails()
         categoryId = request.args.get("categoryId")
-        with sqlite3.connect('database.db') as conn:
+        with sqlite3.connect('SiteBackend.db') as conn:
             cur = conn.cursor()
             cur.execute("SELECT products.productId, products.name, products.price, products.image, categories.name FROM products, categories WHERE products.categoryId = categories.categoryId AND categories.categoryId = ?", (categoryId, ))
             data = cur.fetchall()
@@ -137,7 +140,7 @@ def editProfile():
     if 'email' not in session:
         return redirect(url_for('root'))
     loggedIn, firstName, noOfItems = getLoginDetails()
-    with sqlite3.connect('database.db') as conn:
+    with sqlite3.connect('SiteBackend.db') as conn:
         cur = conn.cursor()
         cur.execute("SELECT userId, email, firstName, lastName, address1, address2, zipcode, city, state, country, phone FROM users WHERE email = ?", (session['email'], ))
         profileData = cur.fetchone()
@@ -154,7 +157,7 @@ def changePassword():
         oldPassword = hashlib.md5(oldPassword.encode()).hexdigest()
         newPassword = request.form['newpassword']
         newPassword = hashlib.md5(newPassword.encode()).hexdigest()
-        with sqlite3.connect('database.db') as conn:
+        with sqlite3.connect('SiteBackend.db') as conn:
             cur = conn.cursor()
             cur.execute("SELECT userId, password FROM users WHERE email = ?", (session['email'], ))
             userId, password = cur.fetchone()
@@ -188,7 +191,7 @@ def updateProfile():
         state = request.form['state']
         country = request.form['country']
         phone = request.form['phone']
-        with sqlite3.connect('database.db') as con:
+        with sqlite3.connect('SiteBackend.db') as con:
                 try:
                     cur = con.cursor()
                     cur.execute('UPDATE users SET firstName = ?, lastName = ?, address1 = ?, address2 = ?, zipcode = ?, city = ?, state = ?, country = ?, phone = ? WHERE email = ?', (firstName, lastName, address1, address2, zipcode, city, state, country, phone, email))
@@ -230,7 +233,7 @@ def login():
 def productDescription():
     loggedIn, firstName, noOfItems = getLoginDetails()
     productId = request.args.get('productId')
-    with sqlite3.connect('database.db') as conn:
+    with sqlite3.connect('SiteBackend.db') as conn:
         cur = conn.cursor()
         cur.execute('SELECT productId, name, price, description, image, stock FROM products WHERE productId = ?', (productId, ))
         productData = cur.fetchone()
@@ -244,7 +247,7 @@ def addToCart():
         return redirect(url_for('loginForm'))
     else:
         productId = int(request.args.get('productId'))
-        with sqlite3.connect('database.db') as conn:
+        with sqlite3.connect('SiteBackend.db') as conn:
             cur = conn.cursor()
             cur.execute("SELECT userId FROM users WHERE email = ?", (session['email'], ))
             userId = cur.fetchone()[0]
@@ -265,7 +268,7 @@ def cart():
         return redirect(url_for('loginForm'))
     loggedIn, firstName, noOfItems = getLoginDetails()
     email = session['email']
-    with sqlite3.connect('database.db') as conn:
+    with sqlite3.connect('SiteBackend.db') as conn:
         cur = conn.cursor()
         cur.execute("SELECT userId FROM users WHERE email = ?", (email, ))
         userId = cur.fetchone()[0]
@@ -282,7 +285,7 @@ def removeFromCart():
         return redirect(url_for('loginForm'))
     email = session['email']
     productId = int(request.args.get('productId'))
-    with sqlite3.connect('database.db') as conn:
+    with sqlite3.connect('SiteBackend.db') as conn:
         cur = conn.cursor()
         cur.execute("SELECT userId FROM users WHERE email = ?", (email, ))
         userId = cur.fetchone()[0]
@@ -304,7 +307,7 @@ def logout():
 
 #Query for validating and encoding Password as per the E-mail
 def is_valid(email, password):
-    con = sqlite3.connect('database.db')
+    con = sqlite3.connect('SiteBackend.db')
     cur = con.cursor()
     cur.execute('SELECT email, password FROM users')
     data = cur.fetchall()
@@ -330,7 +333,7 @@ def register():
         country = request.form['country']
         phone = request.form['phone']
 
-        with sqlite3.connect('database.db') as con:
+        with sqlite3.connect('SiteBackend.db') as con:
             try:
                 cur = con.cursor()
                 cur.execute('INSERT INTO users (password, email, firstName, lastName, address1, address2, zipcode, city, state, country, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', (hashlib.md5(password.encode()).hexdigest(), email, firstName, lastName, address1, address2, zipcode, city, state, country, phone))

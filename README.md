@@ -1,23 +1,17 @@
 # E-commerce Design Cart  
-A straightforward Flask-powered online store where you can shop from available designs for your automobile.
-  
-## Dependencies ##
-3. Sqlite
-2. Flask
-1. Python3 or above
+A straightforward Flask-powered online store where you can shop from available designs for your automobile.Not only this but you can upload your own designs too. Providing feature of Login/Logout,Cart-Page,Contact-Page,About-Section & more such features.
 
-## Running of App ##
-1.Run database.py to set up the database (Or you can reuse existing database included in the repo).
-2. Execute main.py
+## Steps to Run Applications ##
+1.Run SiteBackend.py to set up the database Or Use existing database included in the repo.
+2. Execute application.py (Try to Run in VirtualEnv for Ease).
 3. In the browser, type localhost:5000.
 
-## Pipenv instructions ##
-1. Install pipenv first (python3 -m pip install —user pipenv).
-2. Install prerequisites (pipenv install —dev).
-3. Create a database (pipenv run python database.py).
-4. Execute the server (pipenv run python main.py).
-5. In the browser, type localhost:5000.
-## Sample User ##
+## Requirements ##
+1. Sqlite-3
+2. Flask-2.0 or Above
+3. Python3 or Above
+
+## Sample Login Account ##
 Sample credentials present in existing database:
 Username - sample@example.com
 Password - sample
