@@ -9,7 +9,9 @@ A straightforward Flask-powered online store where you can shop from available d
 
 ## Steps to Run Applications ##
 1.Run SiteBackend.py to set up the database Or Use existing database included in the repo.
+
 2.Execute application.py (Try to Run in VirtualEnv for Ease).
+
 3.In the browser, type localhost:5000.
 
 ## Requirements ##
@@ -23,5 +25,5 @@ https://flask-app-brigon.herokuapp.com/
 ## Sample Login Account ##
 Sample credentials present in existing database:
 Username - sample@example.com
-Password - sample
 
+Password - sample
