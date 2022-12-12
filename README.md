@@ -20,7 +20,7 @@ A straightforward Flask-powered online store where you can shop from available d
 3. Python3 or Above
 
 ## Site Link
-https://flask-app-brigon.herokuapp.com/
+https://brigondesigns.onrender.com
 
 ## Sample Login Account ##
 Sample credentials present in existing database:
